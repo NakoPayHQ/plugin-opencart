@@ -1,0 +1,111 @@
+<form action="{{ save }}" method="post" id="form-nakopay" data-oc-toggle="ajax">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title"><i class="fa-brands fa-bitcoin"></i> {{ heading_title }}</h5>
+    </div>
+    <div class="card-body">
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_status }}</label>
+        <div class="col-sm-10">
+          <select name="payment_nakopay_status" class="form-select">
+            <option value="1" {% if payment_nakopay_status == '1' %}selected{% endif %}>Enabled</option>
+            <option value="0" {% if payment_nakopay_status != '1' %}selected{% endif %}>Disabled</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_title }}</label>
+        <div class="col-sm-10">
+          <input type="text" name="payment_nakopay_title" value="{{ payment_nakopay_title }}" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_description }}</label>
+        <div class="col-sm-10">
+          <textarea name="payment_nakopay_description" class="form-control" rows="3">{{ payment_nakopay_description }}</textarea>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_api_key }}</label>
+        <div class="col-sm-10">
+          <input type="password" name="payment_nakopay_api_key" value="{{ payment_nakopay_api_key }}" class="form-control" autocomplete="off" />
+          <div class="form-text">{{ help_api_key }}</div>
+          {% if error_api_key %}<div class="text-danger">{{ error_api_key }}</div>{% endif %}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_webhook_secret }}</label>
+        <div class="col-sm-10">
+          <input type="password" name="payment_nakopay_webhook_secret" value="{{ payment_nakopay_webhook_secret }}" class="form-control" autocomplete="off" />
+          <div class="form-text">{{ help_webhook_secret }}</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_coin }}</label>
+        <div class="col-sm-10">
+          <select name="payment_nakopay_coin" class="form-select">
+            {% for coin in coins %}
+            <option value="{{ coin.value }}" {% if payment_nakopay_coin == coin.value %}selected{% endif %}>{{ coin.label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_invoice_expiry }}</label>
+        <div class="col-sm-10">
+          <input type="number" name="payment_nakopay_invoice_expiry" value="{{ payment_nakopay_invoice_expiry }}" class="form-control" min="0" />
+          <div class="form-text">{{ help_invoice_expiry }}</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_test_mode }}</label>
+        <div class="col-sm-10">
+          <select name="payment_nakopay_test_mode" class="form-select">
+            <option value="1" {% if payment_nakopay_test_mode == '1' %}selected{% endif %}>Yes</option>
+            <option value="0" {% if payment_nakopay_test_mode != '1' %}selected{% endif %}>No</option>
+          </select>
+          <div class="form-text">{{ help_test_mode }}</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_order_status }}</label>
+        <div class="col-sm-10">
+          <select name="payment_nakopay_order_status_id" class="form-select">
+            {% for status in order_statuses %}
+            <option value="{{ status.order_status_id }}" {% if payment_nakopay_order_status_id == status.order_status_id %}selected{% endif %}>{{ status.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_sort_order }}</label>
+        <div class="col-sm-10">
+          <input type="number" name="payment_nakopay_sort_order" value="{{ payment_nakopay_sort_order }}" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">{{ entry_api_base_url }}</label>
+        <div class="col-sm-10">
+          <input type="text" name="payment_nakopay_api_base_url" value="{{ payment_nakopay_api_base_url }}" class="form-control" placeholder="Leave blank for default" />
+          <div class="form-text">{{ help_api_base_url }}</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="card-footer text-end">
+      <a href="{{ back }}" class="btn btn-light">Back</a>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+</form>
